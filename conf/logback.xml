@@ -53,7 +53,10 @@
 
   <logger name="play" level="INFO" />
   <logger name="application" level="DEBUG" />
-  <logger name="v1.post" level="TRACE" />
+  <logger name="v1.part" level="TRACE" />
+  <logger name="v1.product" level="TRACE" />
+  <logger name="models" level="TRACE" />
+  <logger name="io.getquill" level="DEBUG" />
 
   <root level="WARN">
     <appender-ref ref="ASYNCFILE" />

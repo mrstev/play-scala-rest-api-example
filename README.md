@@ -1,73 +1,47 @@
-# Play REST API
+# Play REST API - Bill of Materials test project
 
-[![Build Status](https://travis-ci.org/playframework/play-scala-rest-api-example.svg?branch=2.6.x)](https://travis-ci.org/playframework/play-scala-rest-api-example)
 
-This is the example project for [Making a REST API in Play](http://developer.lightbend.com/guides/play-rest-api/index.html).
 
-## Appendix
+This application has been forked from the example project for [Making a REST API in Play](http://developer.lightbend.com/guides/play-rest-api/index.html).
 
-### Running
+I committed my changes in a single commit to allow one to inspect the sum total of the files that I worked on.
 
-You need to download and install sbt for this application to run.
+There were a couple of improvements that I made to the project that new new features I had not integrated with a Play project before:
+- I used an asynchronous MySQL database library. This allows the threads connecting to the database to sleep while waiting for replies.  With the entire Web service operating asynchronously from front to back, web this service can handle a high number of concurrent requests requiring database (or other remote resource) access while causing relatively little thread contention, leading to higher throughput.
 
-Once you have sbt installed, the following at the command prompt will start up Play in development mode:
+- I experimented for the first time with the Quill library (https://getquill.io/) for creating compile-time query generation and validation for all MySQL queries. Quill uses an abstract syntax tree to represent SQL using the functional constructs of Scala and validates these generated SQL expressions using Type Inference and constraints. 
+Queries can be written for a variety of target data stores in native Scala.
+
+## Running
+
+The quickest way to get the application running is to download the assembled `.jar` file in the top level directory  and run it using the following command:
+
+```bash
+java -jar /bill-of-materials-rest-api-assembly-1.0-SNAPSHOT.jar
+```
+Play will start up on the HTTP port at <http://localhost:9000/>. 
+
+####Database Config
+
+The connection to the MySQL Database is reference in the file at `/conf/application.conf`. Within it the database is declared in two places (one for schema evolutions, and one for quill's usage). If the configuration is needed to be changed before running the above jar, one can copy the `application.conf` file, change the settings, and launch the application pointing to the new conf file:
+```bash
+
+java -jar -Dconfig.file=/path/to/conf/application.conf /path/to/bill-of-materials-rest-api-assembly-1.0-SNAPSHOT.jar
+``` 
+
+Mor information about how to configure the application is available [here](https://www.playframework.com/documentation/2.7.x/Deploying) and [here](https://www.playframework.com/documentation/2.7.x/ProductionConfiguration)
+
+####Using SBT to Edit and Run in Dev Mode
+
+If you have sbt, you can clone this project an run using sbt. The following at the command prompt will start up Play in development mode:
 
 ```bash
 sbt run
 ```
 
-Play will start up on the HTTP port at <http://localhost:9000/>.   You don't need to deploy or reload anything -- changing any source code while the server is running will automatically recompile and hot-reload the application on the next HTTP request. 
+Play will again start up on the HTTP port at <http://localhost:9000/>.   You don't need to deploy or reload anything -- changing any source code while the server is running will automatically recompile and hot-reload the application on the next HTTP request. 
 
 ### Usage
 
-If you call the same URL from the command line, you’ll see JSON. Using httpie, we can execute the command:
 
-```bash
-http --verbose http://localhost:9000/v1/posts
-```
-
-and get back:
-
-```routes
-GET /v1/posts HTTP/1.1
-```
-
-Likewise, you can also send a POST directly as JSON:
-
-```bash
-http --verbose POST http://localhost:9000/v1/posts title="hello" body="world"
-```
-
-and get:
-
-```routes
-POST /v1/posts HTTP/1.1
-```
-
-### Load Testing
-
-The best way to see what Play can do is to run a load test.  We've included Gatling in this test project for integrated load testing.
-
-Start Play in production mode, by [staging the application](https://www.playframework.com/documentation/2.5.x/Deploying) and running the play script:s
-
-```bash
-sbt stage
-cd target/universal/stage
-./bin/play-scala-rest-api-example -Dplay.http.secret.key=some-long-key-that-will-be-used-by-your-application
-```
-
-Then you'll start the Gatling load test up (it's already integrated into the project):
-
-```bash
-sbt gatling:test
-```
-
-For best results, start the gatling load test up on another machine so you do not have contending resources.  You can edit the [Gatling simulation](http://gatling.io/docs/2.2.2/general/simulation_structure.html#simulation-structure), and change the numbers as appropriate.
-
-Once the test completes, you'll see an HTML file containing the load test chart:
-
-```bash
- ./rest-api/target/gatling/gatlingspec-1472579540405/index.html
-```
-
-That will contain your load test results.
+Please take a look at the Postman documentation [Here](https://documenter.getpostman.com/view/6751411/S11LtHhy) for the published API, and [Here](https://www.getpostman.com/collections/f2754eaa58c38bd441db) for a collection of Postman contract tests. 
