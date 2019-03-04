@@ -14,11 +14,13 @@ Queries can be written for a variety of target data stores in native Scala.
 
 ## Running
 
-The quickest way to get the application running is to download the assembled `.jar` file in the top level directory  and run it using the following command:
+The quickest way to get the application running is to download the assembled [.jar file](https://github.com/mrstev/play-scala-rest-api-example/blob/2.7.x/bill-of-materials-rest-api-assembly-1.0-SNAPSHOT.jar) file in the top level directory and run it using the following command:
 
 ```bash
 java -jar /bill-of-materials-rest-api-assembly-1.0-SNAPSHOT.jar
 ```
+WARNING: It is a very large file.  I did not remove any of the unused dependencies in the example project I forked from, so there are *many* packages in there that don't need to be.
+
 Play will start up on the HTTP port at <http://localhost:9000/>. 
 
 ####Database Config
