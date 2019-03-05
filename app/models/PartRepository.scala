@@ -219,9 +219,9 @@ class PartRepositoryImpl @Inject()()(implicit ec: QuillExecutionContext) extends
 
     getChildren(Nil, List(parentId)) map { partList =>
 
-      val (child, parents) = partList.partition(_.id == parentId)
+      val (parent, children) = partList.partition(_.id == parentId)
 
-      if(child.isEmpty) None else Some(parents)
+      if(parent.isEmpty) None else Some(children)
     }
   }
 
