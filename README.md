@@ -23,7 +23,7 @@ WARNING: It is a very large file.  I did not remove any of the unused dependenci
 
 Play will start up on the HTTP port at <http://localhost:9000/>. 
 
-####Database Config
+#### Database Config
 
 The connection to the MySQL Database is reference in the file at `/conf/application.conf`. Within it the database is declared in two places (one for schema evolutions, and one for quill's usage). If the configuration is needed to be changed before running the above jar, one can copy the `application.conf` file, change the settings, and launch the application pointing to the new conf file:
 ```bash
@@ -33,7 +33,7 @@ java -jar -Dconfig.file=/path/to/conf/application.conf /path/to/bill-of-material
 
 Mor information about how to configure the application is available [here](https://www.playframework.com/documentation/2.7.x/Deploying) and [here](https://www.playframework.com/documentation/2.7.x/ProductionConfiguration)
 
-####Using SBT to Edit and Run in Dev Mode
+#### Using SBT to Edit and Run in Dev Mode
 
 If you have sbt, you can clone this project an run using sbt. The following at the command prompt will start up Play in development mode:
 
