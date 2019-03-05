@@ -35,7 +35,7 @@ Mor information about how to configure the application is available [here](https
 
 #### Using SBT to Edit and Run in Dev Mode
 
-If you have sbt, you can clone this project an run using sbt. The following at the command prompt will start up Play in development mode:
+If you have sbt, you can clone this project and run using sbt. The following at the command prompt will start up Play in development mode:
 
 ```bash
 sbt run
